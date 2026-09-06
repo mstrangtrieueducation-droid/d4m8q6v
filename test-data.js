@@ -6,114 +6,987 @@ const input = (id, prompt, answers, explanation, image = "") => ({ id, type: "in
 const paired = (id, prompt, parts) => ({ id, type: "paired", prompt, points: parts.length, parts });
 
 const sections = [
-  { key: "A", label: "A", title: "Listen and write the letter.", note: "Listen carefully and choose a, b, or c.", points: 4, audio: "assets/audio-a.mp3", questions: [
-    choice("A1", "1.", ["a. canvas", "b. string", "c. paintbrushes"], "c. paintbrushes", "The recording describes paintbrushes, so the correct letter is c."),
-    choice("A2", "2.", ["a. sculptor", "b. carpenter", "c. street painter"], "a. sculptor", "The person described makes sculptures, so the correct word is sculptor."),
-    choice("A3", "3.", ["a. disorganized", "b. dishonest", "c. dissatisfied"], "b. dishonest", "The description means not honest, so dishonest is correct."),
-    choice("A4", "4.", ["a. fascination", "b. disorganized", "c. three-dimensional"], "a. fascination", "The recording refers to a strong interest, which is fascination.")
-  ]},
-  { key: "B", label: "B", title: "Complete the sentences.", note: "Use the word bank: prodigy, sketch, street painter, carpenter, string.", points: 4, questions: [
-    input("B1", "1. We watched the ___ draw a horse on the ground.", ["street painter"], "A street painter creates pictures in a public place, often on the ground."),
-    input("B2", "2. He's only 7 years old and his paintings are amazing! He must be a ___.", ["prodigy"], "A prodigy is a young person with an exceptional natural ability."),
-    input("B3", "3. You need a pencil and a piece of paper to make a ___.", ["sketch"], "A sketch is a quick, simple drawing."),
-    input("B4", "4. A ___ can build a table and chair for you.", ["carpenter"], "A carpenter makes or repairs wooden objects.")
-  ]},
-  { key: "C", label: "C", title: "Complete the sentences. Then match them to the pictures.", note: "Write the missing word, then choose picture a, b, c, or d. The labels are below the original pictures.", points: 8, sectionImage: IMG + "c-picture-strip.png", questions: [
-    paired("C1", "1. I started to paint on the new, white ___.", [
-      { key: "word", label: "Missing word", type: "input", answers: ["canvas"], explanation: "A canvas is the surface an artist paints on." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c", "d"], answers: ["a"], explanation: "Picture a shows a blank canvas." }
-    ]),
-    paired("C2", "2. That famous painter only paints ___, not people or places.", [
-      { key: "word", label: "Missing word", type: "input", answers: ["shapes"], explanation: "Shapes are forms such as circles, squares, and triangles." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c", "d"], answers: ["c"], explanation: "Picture c shows different shapes." }
-    ]),
-    paired("C3", "3. I spilled paint on my shirt! I hope it's ___.", [
-      { key: "word", label: "Missing word", type: "input", answers: ["washable"], explanation: "Washable means that something can be cleaned with water and soap." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c", "d"], answers: ["d"], explanation: "Picture d shows a washing machine, so it represents washable." }
-    ]),
-    paired("C4", "4. The ___ come in many colors.", [
-      { key: "word", label: "Missing word", type: "input", answers: ["pastels"], explanation: "Pastels are colored drawing sticks used by artists." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c", "d"], answers: ["b"], explanation: "Picture b shows a set of pastels." }
-    ])
-  ]},
-  { key: "D", label: "D", title: "Circle the correct words.", note: "Choose the word that makes each sentence complete and logical.", points: 4, questions: [
-    choice("D1", "1. I think that ___ can learn to draw.", ["someone", "anyone"], "anyone", "Anyone means any person at all. The sentence says drawing can be learned by every person."),
-    choice("D2", "2. I can't see ___ because it's too dark.", ["anything", "something"], "anything", "Anything is normally used after a negative verb such as can't see."),
-    choice("D3", "3. ___ in my class is taking a test tomorrow.", ["Everyone", "Anyone"], "Everyone", "Everyone means all the people in the class."),
-    choice("D4", "4. I have ___ to do after school.", ["something", "someone"], "something", "Something refers to an unspecified activity or task; someone refers to a person.")
-  ]},
-  { key: "E", label: "E", title: "Complete the sentences.", note: "Use the correct indefinite pronoun.", points: 4, questions: [
-    input("E1", "1. She's at a new school. She doesn't have friends yet because she doesn't know ___ in her class.", ["anyone", "anybody"], "Use anyone or anybody after the negative verb doesn't know."),
-    input("E2", "2. I think there is ___ at the door. The doorbell just rang.", ["someone", "somebody"], "Someone or somebody refers to an unknown person at the door."),
-    input("E3", "3. He's bored and can't think of ___ to do.", ["anything"], "Anything is used after can't to refer to an activity of any kind."),
-    input("E4", "4. That meal was delicious. I ate ___ on my plate.", ["everything"], "Everything means all the food that was on the plate.")
-  ]},
-  { key: "F", label: "F", title: "Write the words in the correct order to make sentences. Then match them to the pictures.", note: "Write each complete sentence, then choose picture a, b, or c.", points: 6, sectionImage: IMG + "f-picture-strip.png", questions: [
-    paired("F1", "1. be / can / artist / an / Anyone", [
-      { key: "sentence", label: "Sentence", type: "input", answers: ["Anyone can be an artist", "Anyone can be an artist."], explanation: "The correct order is subject + modal + base verb + complement: Anyone can be an artist." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c"], answers: ["b"], explanation: "Picture b shows people painting, so it matches sentence 1." }
-    ]),
-    paired("F2", "2. something / eat / I / to / want", [
-      { key: "sentence", label: "Sentence", type: "input", answers: ["I want something to eat", "I want something to eat."], explanation: "Use want + something + to-infinitive: I want something to eat." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c"], answers: ["c"], explanation: "Picture c shows someone looking for food, so it matches sentence 2." }
-    ]),
-    paired("F3", "3. party / coming / our / Everyone / is / to", [
-      { key: "sentence", label: "Sentence", type: "input", answers: ["Everyone is coming to our party", "Everyone is coming to our party."], explanation: "The present continuous is is coming, followed by to our party." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b", "c"], answers: ["a"], explanation: "Picture a is a party invitation, so it matches sentence 3." }
-    ])
-  ]},
-  { key: "G", label: "G", title: "Listen and circle the correct answer.", note: "Listen carefully and choose True or False.", points: 4, audio: "assets/audio-g.mp3", questions: [
-    choice("G1", "1.", ["T", "F"], "T", "Statement 1 is true according to the recording."),
-    choice("G2", "2.", ["T", "F"], "F", "Statement 2 is false according to the recording."),
-    choice("G3", "3.", ["T", "F"], "F", "Statement 3 is false according to the recording."),
-    choice("G4", "4.", ["T", "F"], "T", "Statement 4 is true according to the recording.")
-  ]},
-  { key: "H", label: "H", title: "Look and complete the sentences.", note: "Study each clean original illustration and write the art word that completes the sentence.", points: 4, questions: [
-    input("H1", "1. In this painting, there is a lot of ___ between light and dark colors.", ["contrast"], "Contrast is the clear difference between light and dark areas.", IMG + "contrast.png"),
-    input("H2", "2. Different thicknesses of oil paint and paintbrushes created an interesting ___ in this painting.", ["texture"], "Texture is how a surface looks or feels. The different lines and paint thicknesses create a varied texture.", IMG + "texture.png"),
-    input("H3", "3. The artist painted a ___ orange sunrise. The sun was very bright.", ["brilliant"], "Brilliant means very bright and vivid, which fits the bright orange sunrise.", IMG + "brilliant.png"),
-    input("H4", "4. The artist used ___ colors to create a calm feeling.", ["pale"], "Pale colors are light and not strong, so they can create a calm feeling.", IMG + "sunrise.png")
-  ]},
-  { key: "I", label: "I", title: "Unscramble and match.", note: "Unscramble each art word, then choose its correct definition.", points: 8, questions: [
-    paired("I1", "1. i e b l f a u t u", [
-      { key: "word", label: "Unscrambled word", type: "input", answers: ["beautiful"], explanation: "The letters form beautiful." },
-      { key: "match", label: "Definition", type: "choice", options: ["a. not being able to say anything", "b. how close up or far away something looks in a painting", "c. the use of dark areas in a drawing or painting", "d. very pretty"], answers: ["d. very pretty"], explanation: "Beautiful means very pretty, so it matches d." }
-    ]),
-    paired("I2", "2. r e t c p e v s e p i", [
-      { key: "word", label: "Unscrambled word", type: "input", answers: ["perspective"], explanation: "The letters form perspective." },
-      { key: "match", label: "Definition", type: "choice", options: ["a. not being able to say anything", "b. how close up or far away something looks in a painting", "c. the use of dark areas in a drawing or painting", "d. very pretty"], answers: ["b. how close up or far away something looks in a painting"], explanation: "Perspective shows depth and distance in a picture, so it matches b." }
-    ]),
-    paired("I3", "3. i d g h a s n", [
-      { key: "word", label: "Unscrambled word", type: "input", answers: ["shading"], explanation: "The letters form shading." },
-      { key: "match", label: "Definition", type: "choice", options: ["a. not being able to say anything", "b. how close up or far away something looks in a painting", "c. the use of dark areas in a drawing or painting", "d. very pretty"], answers: ["c. the use of dark areas in a drawing or painting"], explanation: "Shading uses darker areas to show form and light, so it matches c." }
-    ]),
-    paired("I4", "4. s e h e p l s e c s", [
-      { key: "word", label: "Unscrambled word", type: "input", answers: ["speechless"], explanation: "The letters form speechless." },
-      { key: "match", label: "Definition", type: "choice", options: ["a. not being able to say anything", "b. how close up or far away something looks in a painting", "c. the use of dark areas in a drawing or painting", "d. very pretty"], answers: ["a. not being able to say anything"], explanation: "Speechless means unable to speak, so it matches a." }
-    ])
-  ]},
-  { key: "J", label: "J", title: "Write the words in the correct order to make sentences or questions.", note: "Use every word once. Add capital letters and punctuation.", points: 4, questions: [
-    input("J1", "1. get / I / you / sweater / Shall / a", ["Shall I get you a sweater", "Shall I get you a sweater?"], "Use Shall I + base verb to offer help: Shall I get you a sweater?"),
-    input("J2", "2. help / you / homework / I / your / will / with", ["I will help you with your homework", "I will help you with your homework."], "Use will for a promise or offer: I will help you with your homework."),
-    input("J3", "3. take / to / you / store / will / I / the", ["I will take you to the store", "I will take you to the store."], "The correct order is: I will take you to the store."),
-    input("J4", "4. turn down / music / Shall / the / I", ["Shall I turn down the music", "Shall I turn down the music?"], "Use Shall I + base verb for an offer: Shall I turn down the music?")
-  ]},
-  { key: "K", label: "K", title: "Complete the sentences. Write will or shall.", note: "Use shall in questions that offer help; use will in statements that promise help.", points: 6, questions: [
-    choice("K1", "1. I ___ give you a call when I get home.", ["will", "shall"], "will", "This is a statement and a promise, so use will."),
-    choice("K2", "2. ___ I find out what time the museum opens?", ["will", "shall"], "shall", "Shall I ...? is used to offer to do something."),
-    choice("K3", "3. ___ I pick you up from school tomorrow?", ["will", "shall"], "shall", "This question offers help, so use Shall I ...?"),
-    choice("K4", "4. I ___ wash the dishes for you.", ["will", "shall"], "will", "This is a statement offering help, so use will."),
-    choice("K5", "5. I ___ help you clean your room.", ["will", "shall"], "will", "This is a statement and an offer, so use will."),
-    choice("K6", "6. ___ I make dinner now?", ["will", "shall"], "shall", "This is a question offering to make dinner, so use Shall I ...?")
-  ]},
-  { key: "L", label: "L", title: "Write the words in the correct order to make sentences or questions. Then match them to the pictures.", note: "Write each complete sentence or question, then choose picture a or b.", points: 4, sectionImage: IMG + "l-picture-strip.png", questions: [
-    paired("L1", "1. glass / I / you / get / Shall / water / of / a", [
-      { key: "sentence", label: "Question", type: "input", answers: ["Shall I get you a glass of water", "Shall I get you a glass of water?"], explanation: "Use Shall I + base verb for an offer: Shall I get you a glass of water?" },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b"], answers: ["a"], explanation: "Picture a shows someone who is hot and may need water." }
-    ]),
-    paired("L2", "2. open / help / I / you / it / will", [
-      { key: "sentence", label: "Sentence", type: "input", answers: ["I will help you open it", "I will help you open it."], explanation: "Use will + base verb, followed by help + object + base verb: I will help you open it." },
-      { key: "match", label: "Picture label", type: "choice", options: ["a", "b"], answers: ["b"], explanation: "Picture b shows a person helping someone open a container." }
-    ])
-  ]}
+  {
+    "key": "A",
+    "label": "A",
+    "title": "Listen and write the letter.",
+    "note": "Listen carefully and choose a, b, or c.",
+    "points": 4,
+    "audio": "assets/audio-a.mp3",
+    "questions": [
+      {
+        "id": "A1",
+        "type": "choice",
+        "prompt": "1.",
+        "options": [
+          "a. canvas",
+          "b. string",
+          "c. paintbrushes"
+        ],
+        "answers": [
+          "c. paintbrushes"
+        ],
+        "explanation": "The recording describes paintbrushes, so the correct letter is c.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "A2",
+        "type": "choice",
+        "prompt": "2.",
+        "options": [
+          "a. sculptor",
+          "b. carpenter",
+          "c. street painter"
+        ],
+        "answers": [
+          "a. sculptor"
+        ],
+        "explanation": "The person described makes sculptures, so the correct word is sculptor.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "A3",
+        "type": "choice",
+        "prompt": "3.",
+        "options": [
+          "a. disorganized",
+          "b. dishonest",
+          "c. dissatisfied"
+        ],
+        "answers": [
+          "b. dishonest"
+        ],
+        "explanation": "The description means not honest, so dishonest is correct.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "A4",
+        "type": "choice",
+        "prompt": "4.",
+        "options": [
+          "a. fascination",
+          "b. disorganized",
+          "c. three-dimensional"
+        ],
+        "answers": [
+          "a. fascination"
+        ],
+        "explanation": "The recording refers to a strong interest, which is fascination.",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "B",
+    "label": "B",
+    "title": "Complete the sentences.",
+    "note": "Use the word bank: prodigy, sketch, street painter, carpenter, string.",
+    "points": 4,
+    "questions": [
+      {
+        "id": "B1",
+        "type": "input",
+        "prompt": "1. We watched the ___ draw a horse on the ground.",
+        "answers": [
+          "street painter"
+        ],
+        "explanation": "A street painter creates pictures in a public place, often on the ground.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "B2",
+        "type": "input",
+        "prompt": "2. He's only 7 years old and his paintings are amazing! He must be a ___.",
+        "answers": [
+          "prodigy"
+        ],
+        "explanation": "A prodigy is a young person with an exceptional natural ability.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "B3",
+        "type": "input",
+        "prompt": "3. You need a pencil and a piece of paper to make a ___.",
+        "answers": [
+          "sketch"
+        ],
+        "explanation": "A sketch is a quick, simple drawing.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "B4",
+        "type": "input",
+        "prompt": "4. A ___ can build a table and chair for you.",
+        "answers": [
+          "carpenter"
+        ],
+        "explanation": "A carpenter makes or repairs wooden objects.",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "C",
+    "label": "C",
+    "title": "Complete the sentences. Then match them to the pictures.",
+    "note": "Write the missing word, then choose picture a, b, c, or d. The labels are below the original pictures.",
+    "points": 8,
+    "sectionImage": "assets/test4-images/c-picture-strip.png",
+    "questions": [
+      {
+        "id": "C1",
+        "type": "paired",
+        "prompt": "1. I started to paint on the new, white ___.",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Missing word",
+            "type": "input",
+            "answers": [
+              "canvas"
+            ],
+            "explanation": "A canvas is the surface an artist paints on."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "answers": [
+              "a"
+            ],
+            "explanation": "Picture a shows a blank canvas."
+          }
+        ]
+      },
+      {
+        "id": "C2",
+        "type": "paired",
+        "prompt": "2. That famous painter only paints ___, not people or places.",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Missing word",
+            "type": "input",
+            "answers": [
+              "shapes"
+            ],
+            "explanation": "Shapes are forms such as circles, squares, and triangles."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "answers": [
+              "c"
+            ],
+            "explanation": "Picture c shows different shapes."
+          }
+        ]
+      },
+      {
+        "id": "C3",
+        "type": "paired",
+        "prompt": "3. I spilled paint on my shirt! I hope it's ___.",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Missing word",
+            "type": "input",
+            "answers": [
+              "washable"
+            ],
+            "explanation": "Washable means that something can be cleaned with water and soap."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "answers": [
+              "d"
+            ],
+            "explanation": "Picture d shows a washing machine, so it represents washable."
+          }
+        ]
+      },
+      {
+        "id": "C4",
+        "type": "paired",
+        "prompt": "4. The ___ come in many colors.",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Missing word",
+            "type": "input",
+            "answers": [
+              "pastels"
+            ],
+            "explanation": "Pastels are colored drawing sticks used by artists."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "answers": [
+              "b"
+            ],
+            "explanation": "Picture b shows a set of pastels."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "D",
+    "label": "D",
+    "title": "Circle the correct words.",
+    "note": "Choose the word that makes each sentence complete and logical.",
+    "points": 4,
+    "questions": [
+      {
+        "id": "D1",
+        "type": "choice",
+        "prompt": "1. I think that ___ can learn to draw.",
+        "options": [
+          "someone",
+          "anyone"
+        ],
+        "answers": [
+          "anyone"
+        ],
+        "explanation": "Anyone means any person at all. The sentence says drawing can be learned by every person.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "D2",
+        "type": "choice",
+        "prompt": "2. I can't see ___ because it's too dark.",
+        "options": [
+          "anything",
+          "something"
+        ],
+        "answers": [
+          "anything"
+        ],
+        "explanation": "Anything is normally used after a negative verb such as can't see.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "D3",
+        "type": "choice",
+        "prompt": "3. ___ in my class is taking a test tomorrow.",
+        "options": [
+          "Everyone",
+          "Anyone"
+        ],
+        "answers": [
+          "Everyone"
+        ],
+        "explanation": "Everyone means all the people in the class.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "D4",
+        "type": "choice",
+        "prompt": "4. I have ___ to do after school.",
+        "options": [
+          "something",
+          "someone"
+        ],
+        "answers": [
+          "something"
+        ],
+        "explanation": "Something refers to an unspecified activity or task; someone refers to a person.",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "E",
+    "label": "E",
+    "title": "Complete the sentences.",
+    "note": "Use the correct indefinite pronoun.",
+    "points": 4,
+    "questions": [
+      {
+        "id": "E1",
+        "type": "input",
+        "prompt": "1. She's at a new school. She doesn't have friends yet because she doesn't know ___ in her class.",
+        "answers": [
+          "anyone",
+          "anybody"
+        ],
+        "explanation": "Use anyone or anybody after the negative verb doesn't know.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "E2",
+        "type": "input",
+        "prompt": "2. I think there is ___ at the door. The doorbell just rang.",
+        "answers": [
+          "someone",
+          "somebody"
+        ],
+        "explanation": "Someone or somebody refers to an unknown person at the door.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "E3",
+        "type": "input",
+        "prompt": "3. He's bored and can't think of ___ to do.",
+        "answers": [
+          "anything"
+        ],
+        "explanation": "Anything is used after can't to refer to an activity of any kind.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "E4",
+        "type": "input",
+        "prompt": "4. That meal was delicious. I ate ___ on my plate.",
+        "answers": [
+          "everything"
+        ],
+        "explanation": "Everything means all the food that was on the plate.",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "F",
+    "label": "F",
+    "title": "Write the words in the correct order to make sentences. Then match them to the pictures.",
+    "note": "Write each complete sentence, then choose picture a, b, or c.",
+    "points": 6,
+    "sectionImage": "assets/test4-images/f-picture-strip.png",
+    "questions": [
+      {
+        "id": "F1",
+        "type": "paired",
+        "prompt": "1. be / can / artist / an / Anyone",
+        "points": 2,
+        "parts": [
+          {
+            "key": "sentence",
+            "label": "Sentence",
+            "type": "input",
+            "answers": [
+              "Anyone can be an artist",
+              "Anyone can be an artist."
+            ],
+            "explanation": "The correct order is subject + modal + base verb + complement: Anyone can be an artist."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ],
+            "answers": [
+              "b"
+            ],
+            "explanation": "Picture b shows people painting, so it matches sentence 1."
+          }
+        ]
+      },
+      {
+        "id": "F2",
+        "type": "paired",
+        "prompt": "2. something / eat / I / to / want",
+        "points": 2,
+        "parts": [
+          {
+            "key": "sentence",
+            "label": "Sentence",
+            "type": "input",
+            "answers": [
+              "I want something to eat",
+              "I want something to eat."
+            ],
+            "explanation": "Use want + something + to-infinitive: I want something to eat."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ],
+            "answers": [
+              "c"
+            ],
+            "explanation": "Picture c shows someone looking for food, so it matches sentence 2."
+          }
+        ]
+      },
+      {
+        "id": "F3",
+        "type": "paired",
+        "prompt": "3. party / coming / our / Everyone / is / to",
+        "points": 2,
+        "parts": [
+          {
+            "key": "sentence",
+            "label": "Sentence",
+            "type": "input",
+            "answers": [
+              "Everyone is coming to our party",
+              "Everyone is coming to our party."
+            ],
+            "explanation": "The present continuous is is coming, followed by to our party."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b",
+              "c"
+            ],
+            "answers": [
+              "a"
+            ],
+            "explanation": "Picture a is a party invitation, so it matches sentence 3."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "G",
+    "label": "G",
+    "title": "Listen and circle the correct answer.",
+    "note": "Listen carefully and choose True or False.",
+    "points": 4,
+    "audio": "assets/audio-g.mp3",
+    "questions": [
+      {
+        "id": "G1",
+        "type": "choice",
+        "prompt": "1.",
+        "options": [
+          "T",
+          "F"
+        ],
+        "answers": [
+          "T"
+        ],
+        "explanation": "Statement 1 is true according to the recording.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "G2",
+        "type": "choice",
+        "prompt": "2.",
+        "options": [
+          "T",
+          "F"
+        ],
+        "answers": [
+          "F"
+        ],
+        "explanation": "Statement 2 is false according to the recording.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "G3",
+        "type": "choice",
+        "prompt": "3.",
+        "options": [
+          "T",
+          "F"
+        ],
+        "answers": [
+          "F"
+        ],
+        "explanation": "Statement 3 is false according to the recording.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "G4",
+        "type": "choice",
+        "prompt": "4.",
+        "options": [
+          "T",
+          "F"
+        ],
+        "answers": [
+          "T"
+        ],
+        "explanation": "Statement 4 is true according to the recording.",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "H",
+    "label": "H",
+    "title": "Look and complete the sentences.",
+    "note": "Study each clean original illustration and write the art word that completes the sentence.",
+    "points": 4,
+    "questions": [
+      {
+        "id": "H1",
+        "type": "input",
+        "prompt": "1. In this painting, there is a lot of ___ between light and dark colors.",
+        "answers": [
+          "contrast"
+        ],
+        "explanation": "Contrast is the clear difference between light and dark areas.",
+        "image": "assets/test4-images/contrast.png",
+        "points": 1
+      },
+      {
+        "id": "H2",
+        "type": "input",
+        "prompt": "2. Different thicknesses of oil paint and paintbrushes created an interesting ___ in this painting.",
+        "answers": [
+          "texture"
+        ],
+        "explanation": "Texture is how a surface looks or feels. The different lines and paint thicknesses create a varied texture.",
+        "image": "assets/test4-images/texture.png",
+        "points": 1
+      },
+      {
+        "id": "H3",
+        "type": "input",
+        "prompt": "3. The artist painted a ___ orange sunrise. The sun was very bright.",
+        "answers": [
+          "brilliant"
+        ],
+        "explanation": "Brilliant means very bright and vivid, which fits the bright orange sunrise.",
+        "image": "assets/test4-images/brilliant.png",
+        "points": 1
+      },
+      {
+        "id": "H4",
+        "type": "input",
+        "prompt": "4. The artist used ___ colors to create a calm feeling.",
+        "answers": [
+          "pale"
+        ],
+        "explanation": "Pale colors are light and not strong, so they can create a calm feeling.",
+        "image": "assets/test4-images/sunrise.png",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "I",
+    "label": "I",
+    "title": "Unscramble and match.",
+    "note": "Unscramble each art word, then choose its correct definition.",
+    "points": 8,
+    "questions": [
+      {
+        "id": "I1",
+        "type": "paired",
+        "prompt": "1. i e b l f a u t u",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Unscrambled word",
+            "type": "input",
+            "answers": [
+              "beautiful"
+            ],
+            "explanation": "The letters form beautiful."
+          },
+          {
+            "key": "match",
+            "label": "Definition",
+            "type": "choice",
+            "options": [
+              "a. not being able to say anything",
+              "b. how close up or far away something looks in a painting",
+              "c. the use of dark areas in a drawing or painting",
+              "d. very pretty"
+            ],
+            "answers": [
+              "d. very pretty"
+            ],
+            "explanation": "Beautiful means very pretty, so it matches d."
+          }
+        ]
+      },
+      {
+        "id": "I2",
+        "type": "paired",
+        "prompt": "2. r e t c p e v s e p i",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Unscrambled word",
+            "type": "input",
+            "answers": [
+              "perspective"
+            ],
+            "explanation": "The letters form perspective."
+          },
+          {
+            "key": "match",
+            "label": "Definition",
+            "type": "choice",
+            "options": [
+              "a. not being able to say anything",
+              "b. how close up or far away something looks in a painting",
+              "c. the use of dark areas in a drawing or painting",
+              "d. very pretty"
+            ],
+            "answers": [
+              "b. how close up or far away something looks in a painting"
+            ],
+            "explanation": "Perspective shows depth and distance in a picture, so it matches b."
+          }
+        ]
+      },
+      {
+        "id": "I3",
+        "type": "paired",
+        "prompt": "3. i d g h a s n",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Unscrambled word",
+            "type": "input",
+            "answers": [
+              "shading"
+            ],
+            "explanation": "The letters form shading."
+          },
+          {
+            "key": "match",
+            "label": "Definition",
+            "type": "choice",
+            "options": [
+              "a. not being able to say anything",
+              "b. how close up or far away something looks in a painting",
+              "c. the use of dark areas in a drawing or painting",
+              "d. very pretty"
+            ],
+            "answers": [
+              "c. the use of dark areas in a drawing or painting"
+            ],
+            "explanation": "Shading uses darker areas to show form and light, so it matches c."
+          }
+        ]
+      },
+      {
+        "id": "I4",
+        "type": "paired",
+        "prompt": "4. s e h e p l s e c s",
+        "points": 2,
+        "parts": [
+          {
+            "key": "word",
+            "label": "Unscrambled word",
+            "type": "input",
+            "answers": [
+              "speechless"
+            ],
+            "explanation": "The letters form speechless."
+          },
+          {
+            "key": "match",
+            "label": "Definition",
+            "type": "choice",
+            "options": [
+              "a. not being able to say anything",
+              "b. how close up or far away something looks in a painting",
+              "c. the use of dark areas in a drawing or painting",
+              "d. very pretty"
+            ],
+            "answers": [
+              "a. not being able to say anything"
+            ],
+            "explanation": "Speechless means unable to speak, so it matches a."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "J",
+    "label": "J",
+    "title": "Write the words in the correct order to make sentences or questions.",
+    "note": "Use every word once. Add capital letters and punctuation.",
+    "points": 4,
+    "questions": [
+      {
+        "id": "J1",
+        "type": "input",
+        "prompt": "1. get / I / you / sweater / Shall / a",
+        "answers": [
+          "Shall I get you a sweater",
+          "Shall I get you a sweater?"
+        ],
+        "explanation": "Use Shall I + base verb to offer help: Shall I get you a sweater?",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "J2",
+        "type": "input",
+        "prompt": "2. help / you / homework / I / your / will / with",
+        "answers": [
+          "I will help you with your homework",
+          "I will help you with your homework."
+        ],
+        "explanation": "Use will for a promise or offer: I will help you with your homework.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "J3",
+        "type": "input",
+        "prompt": "3. take / to / you / store / will / I / the",
+        "answers": [
+          "I will take you to the store",
+          "I will take you to the store."
+        ],
+        "explanation": "The correct order is: I will take you to the store.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "J4",
+        "type": "input",
+        "prompt": "4. turn down / music / Shall / the / I",
+        "answers": [
+          "Shall I turn down the music",
+          "Shall I turn down the music?"
+        ],
+        "explanation": "Use Shall I + base verb for an offer: Shall I turn down the music?",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "K",
+    "label": "K",
+    "title": "Complete the sentences. Write will or shall.",
+    "note": "Use shall in questions that offer help; use will in statements that promise help.",
+    "points": 6,
+    "questions": [
+      {
+        "id": "K1",
+        "type": "choice",
+        "prompt": "1. I ___ give you a call when I get home.",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "will"
+        ],
+        "explanation": "This is a statement and a promise, so use will.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "K2",
+        "type": "choice",
+        "prompt": "2. ___ I find out what time the museum opens?",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "shall"
+        ],
+        "explanation": "Shall I ...? is used to offer to do something.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "K3",
+        "type": "choice",
+        "prompt": "3. ___ I pick you up from school tomorrow?",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "shall"
+        ],
+        "explanation": "This question offers help, so use Shall I ...?",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "K4",
+        "type": "choice",
+        "prompt": "4. I ___ wash the dishes for you.",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "will"
+        ],
+        "explanation": "This is a statement offering help, so use will.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "K5",
+        "type": "choice",
+        "prompt": "5. I ___ help you clean your room.",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "will"
+        ],
+        "explanation": "This is a statement and an offer, so use will.",
+        "image": "",
+        "points": 1
+      },
+      {
+        "id": "K6",
+        "type": "choice",
+        "prompt": "6. ___ I make dinner now?",
+        "options": [
+          "will",
+          "shall"
+        ],
+        "answers": [
+          "shall"
+        ],
+        "explanation": "This is a question offering to make dinner, so use Shall I ...?",
+        "image": "",
+        "points": 1
+      }
+    ]
+  },
+  {
+    "key": "L",
+    "label": "L",
+    "title": "Write the words in the correct order to make sentences or questions. Then match them to the pictures.",
+    "note": "Write each complete sentence or question, then choose picture a or b.",
+    "points": 4,
+    "sectionImage": "assets/test4-images/l-picture-strip.png",
+    "questions": [
+      {
+        "id": "L1",
+        "type": "paired",
+        "prompt": "1. glass / I / you / get / Shall / water / of / a",
+        "points": 2,
+        "parts": [
+          {
+            "key": "sentence",
+            "label": "Question",
+            "type": "input",
+            "answers": [
+              "Shall I get you a glass of water",
+              "Shall I get you a glass of water?"
+            ],
+            "explanation": "Use Shall I + base verb for an offer: Shall I get you a glass of water?"
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b"
+            ],
+            "answers": [
+              "a"
+            ],
+            "explanation": "Picture a shows someone who is hot and may need water."
+          }
+        ]
+      },
+      {
+        "id": "L2",
+        "type": "paired",
+        "prompt": "2. open / help / I / you / it / will",
+        "points": 2,
+        "parts": [
+          {
+            "key": "sentence",
+            "label": "Sentence",
+            "type": "input",
+            "answers": [
+              "I will help you open it",
+              "I will help you open it."
+            ],
+            "explanation": "Use will + base verb, followed by help + object + base verb: I will help you open it."
+          },
+          {
+            "key": "match",
+            "label": "Picture label",
+            "type": "choice",
+            "options": [
+              "a",
+              "b"
+            ],
+            "answers": [
+              "b"
+            ],
+            "explanation": "Picture b shows a person helping someone open a container."
+          }
+        ]
+      }
+    ]
+  }
 ];
